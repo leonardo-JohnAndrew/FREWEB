@@ -105,7 +105,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     }
     if($_SERVER['REQUEST_METHOD']==='GET'){
         if(isset($_GET['view_note'])){
-            if(isset($_GET['search_name'])==''){
+            if(empty($_GET['search_name'])){
                 $_SESSION['status'] = "Enter Username to view";
                 location('notes.php'); 
             }else{
