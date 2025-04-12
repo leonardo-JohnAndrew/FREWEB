@@ -49,7 +49,7 @@ class upload
             if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetfilepath)) {
                 return [
                     "message" => "File Uploaded",
-                    "path" => $targetfilepath,
+
                     "filename" => $this->filename
                 ];
             } else {

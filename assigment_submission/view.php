@@ -4,18 +4,26 @@ include_once('./database.php');
 $db = new database('assignmentdb');
 $conn = $db->connection();
 $assignments = $db->fetchAssignments($conn);
+if (!isset($_SESSION['permission'])) {
+    header('Location: login.php');
+    exit;
+}
+
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'student') {
+    header('Location: form.php');
+    exit;
+}
+
 
 ?>
 <style>
     .form {
-
         background-color: #1b2d7c;
         padding: 30px;
         border-radius: 10px;
         box-shadow: 0 0 15px rgba(158, 174, 230, 0.23);
         height: 500px;
         margin-top: 100px;
-
     }
 
     .content {

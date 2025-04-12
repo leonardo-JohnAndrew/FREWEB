@@ -1,5 +1,17 @@
 <?php
 include_once('./header.php');
+
+if (!isset($_SESSION['permission'])) {
+    header('Location: login.php');
+    exit;
+}
+
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'teacher') {
+    header('Location: view.php');
+    exit;
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -7,7 +19,7 @@ include_once('./header.php');
 <head>
 
     <style>
-        form {
+        .form {
 
             background-color: #1b2d7c;
             padding: 30px;
@@ -31,13 +43,35 @@ include_once('./header.php');
             outline: none;
             box-shadow: #d4a017 2px 2px 4px;
         }
+
+        .success {
+            color: lightblue;
+            margin-bottom: 5px;
+
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 
 <body>
-    <form action="action.php" method="POST" enctype="multipart/form-data">
+    <form class="form" action="action.php" method="POST" enctype="multipart/form-data">
         <h2>Submit Your Assignment</h2>
-
+        <?php
+        if (isset($_SESSION['upload_error'])) {
+        ?>
+            <div class="error">
+                <span><?= $_SESSION['upload_error'] ?> </span>
+            </div>
+        <?php
+        } else { ?>
+            <div class="success">
+                <span><?= isset($_SESSION['upload_success']) ? $_SESSION['upload_success'] : "" ?> </span>
+            </div>
+        <?php } ?>
         <label>Student Name:</label><br>
         <input type="text" name="student_name" required><br>
 

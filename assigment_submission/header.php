@@ -33,6 +33,7 @@ include_once('./database.php');
         display: flex;
         background-color: #1b2d7c;
 
+
     }
 
     .title {
@@ -41,12 +42,6 @@ include_once('./database.php');
         padding-left: 10px;
     }
 
-    .button-logout {
-        position: absolute;
-        right: 30px;
-        margin-top: 20px;
-
-    }
 
     input[type="text"],
     input[type="file"] {
@@ -79,14 +74,28 @@ include_once('./database.php');
     h3 {
         color: goldenrod;
     }
+
+    form {
+        padding: 0;
+        margin: 0;
+    }
+
+    .button-logout {
+        position: absolute;
+        right: 20px;
+        margin-top: 20px;
+    }
 </style>
 <div class="header">
     <div class="title">
-        <h3> Assignment Submission
+        <h3> Assignment Submission : Hello <?= isset($_SESSION['name']) ? $_SESSION['name'] : "No Account Login " ?>
         </h3>
     </div>
-</div>
-
+    <form action="action.php" method="POST">
+        <div class="button-logout">
+            <input type="submit" value="logout" name="logout">
+        </div>
+    </form>
 </div>
 
 </html>
