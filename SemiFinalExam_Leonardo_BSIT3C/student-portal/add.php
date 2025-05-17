@@ -18,18 +18,14 @@ if (isset($_POST['submit'])) {
     $filename = $upload->uploadfile();
     if ($filename['status'] == "Failed") {
         // session error 
-        $_SESSION['error-message']['add-error'] = $filename['error'];
+        $_SESSION['error-message'] = $filename['error'];
     } else {
 
         $addRecord = $database->upload($name, $email, $age, $filename['filename']);
         if ($addRecord['status'] == 'Failed') {
-            $_SESSION['error-message']['add-error'] = $addRecord['error'];
+            $_SESSION['error-message'] = $addRecord['error'];
         } else {
-            $_SESSION['error-message'] = [
-                "add-error" => "",
-                "view-error" => "",
-                "delete-error" => ""
-            ];
+            $_SESSION['error-message'] = "";
             $_SESSION['notification'] = $addRecord['message'];
         }
     }
@@ -50,11 +46,12 @@ if (isset($_POST['submit'])) {
 <div class="main">
     <div class="title">
         <h1>Add Record</h1>
-
+        <span>**For File Upload(PDF,DOCX,TXT)**</span>
         <div class=<?php echo ($_SESSION['error-message'] == "") ? "notif-success" : "notif-error" ?>>
             <h4>
-                <?php echo ($_SESSION['error-message'] == "") ? $_SESSION['notification'] : $_SESSION['error-message']['add-error'] ?>
+                <?php echo ($_SESSION['error-message'] == "") ? $_SESSION['notification'] : $_SESSION['error-message'] ?>
             </h4>
+
 
         </div>
     </div>

@@ -15,7 +15,7 @@ if (isset($_GET['forget'])) {
     // clear cookie
     setcookie("name", "", time() - 3600, '/');
 
-    // header('location: dashboard.php');
+    header('location: dashboard.php');
 }
 if (isset($_GET['logout'])) {
     // destroy session 

@@ -10,6 +10,7 @@ if (!isset($_SESSION['error'])) $_SESSION['error'] = ""; //errror message
 
 if (isset($_POST['login'])) {
     //session name 
+    $_SESSION['error'] = "";
     $_SESSION['name'] = $_POST['name'];
     //create object /create connection
     $database = new crud();
@@ -49,7 +50,7 @@ if (isset($_POST['login'])) {
     body {
         background: #ebebe0;
         display: grid;
-        grid-template-columns: 300px 1fr 300px;
+        grid-template-columns: 300px auto 300px;
         grid-row: 300px 300px;
     }
 
@@ -58,14 +59,12 @@ if (isset($_POST['login'])) {
     }
 
     .main {
-
+        width: 400px;
         grid-row: 1/2;
         grid-column: 2/3;
         margin-top: 7em;
 
         place-self: center;
-
-
     }
 
     label {
@@ -78,7 +77,15 @@ if (isset($_POST['login'])) {
         background: rgb(241, 80, 0);
         background: linear-gradient(0deg, rgb(243, 110, 44) 0%, rgb(255, 197, 72) 100%);
         border: 5px 0 5px 0;
-        padding: 10px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+
+        place-items: center;
+
+        h2 {
+            display: inline;
+        }
     }
 
     .main-inputs {
@@ -86,6 +93,7 @@ if (isset($_POST['login'])) {
         border: solid darkgray 2px;
 
         padding: 30px 10px 20px 10px;
+        place-items: center;
     }
 
     .input-login {
